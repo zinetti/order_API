@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
 const pratoSchema = new mongoose.Schema({
-    nome: { type: String, require: true },
+    nome: { type: String, required: [true, "Nome do prato é obrigatório!"] },
     descricao: { type: String },
-    preco: { type: Number, require: true},
+    preco: { type: Number, required: [true, "Preço do prato é obrigatório!"]},
     categoria: { type: String }
 }, { timestamps: true, versionKey: false });
 
