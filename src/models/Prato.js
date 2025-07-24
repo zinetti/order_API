@@ -8,5 +8,5 @@ const pratoSchema = new mongoose.Schema({
 }, { timestamps: true, versionKey: false });
 
 
-const Prato = mongoose.model("Prato", pratoSchema);
+const Prato = mongoose.model("Prato", pratoSchema, "Prato");
 export default Prato;

@@ -4,3 +4,8 @@ $ npm install --save-dev nodemon
 
 Adicionar um script para o nodemon 
 "dev": "nodemon server.js" 
+
+Ao iniciar o projeto instale todas as dependencias, 
+e crie o .env na raiz contendo:
+DB_CONNECTION=
+PORT=

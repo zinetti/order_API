@@ -12,5 +12,5 @@ const pedidoSchema = new mongoose.Schema({
     status: { type: String, enum: ["pendente", "preparando", "entregue"], default: "pendente" }
 }, { timestamps: true, versionKey: false });
 
-const Pedido = mongoose.model("Pedido", pedidoSchema);
+const Pedido = mongoose.model("Pedido", pedidoSchema, "Pedido");
 export default Pedido;
