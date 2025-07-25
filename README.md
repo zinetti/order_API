@@ -14,9 +14,11 @@ Permite criar, ler, atualizar e deletar (CRUD) esses recursos, além de aplicar 
 | Passo | Descrição | Duração Estimada |
 |-------|-----------|------------------|
 | 1     | Configuração inicial do projeto com Express, Mongoose e MongoDB | 30 min |
-| 2     | CRUD básico para Clientes e Pratos (GET, POST, PUT, DELETE) | 30h |
+| 2     | CRUD básico para Clientes e Pratos (GET, POST, PUT, DELETE) | 30 min |
 | 3     | CRUD para Pedidos com cálculo automático de total e populate() | 1h |
-| 4     | Filtros avançados por status, faixa de total e categoria | 30h |
+| 4     | Filtros avançados por status, faixa de total e categoria | 30 min |
+| 5     | Criação de middlewares personalizados para tratamento centralizado de erros. Foram implementadas classes de erro customizadas (`ErroBase`, `BadRequest`, `InvalidData`, `NotFound`), que padronizam as respostas de erro da API. O middleware `errorHandler` foi configurado para interceptar erros de validação do Mongoose (`ValidationError`, `CastError`) e transformar em mensagens claras e estruturadas, com status HTTP apropriado e detalhes úteis para o cliente da API. | 1h               |
+| 6     | Implementação de validações detalhadas nos Schemas do Mongoose para garantir integridade dos dados: campos obrigatórios, limites de tamanho, formatos de email, enumerações para status e categorias, validações numéricas para preços, quantidades e totais, além de mensagens de erro personalizadas para cada regra. | 30 min               |
 
 
 ---
