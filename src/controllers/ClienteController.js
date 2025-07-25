@@ -1,5 +1,5 @@
 import NotFound from "../error/NotFound.js";
-import Cliente from "../models/Cliente.js"
+import { Cliente } from "../models/index.js"
 
 class ClienteController {
 

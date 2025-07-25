@@ -1,6 +1,7 @@
 import { populate } from "dotenv";
-import Pedido from "../models/Pedido.js";
-import Prato from "../models/Prato.js";
+// import Pedido from "../models/Pedido.js";
+// import Prato from "../models/Prato.js";
+import { Prato, Pedido } from "../models/index.js"
 
 class PedidoController { 
     //GET- listar todos os pedidos
@@ -9,7 +10,7 @@ class PedidoController {
             const pedidos = await Pedido.find().populate("cliente").populate("pratos.prato");
             res.status(200).json(pedidos);
         } catch (error) {
-            next(error);
+            next(error)
         }
     };
 

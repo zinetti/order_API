@@ -1,4 +1,4 @@
-import Prato from "../models/Prato.js";
+import { Prato } from "../models/index.js";
 
 class PratoController {
   static async listarPratos(req, res, next) {
