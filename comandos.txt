@@ -9,3 +9,5 @@ Ao iniciar o projeto instale todas as dependencias,
 e crie o .env na raiz contendo:
 DB_CONNECTION=
 PORT=
+
+Verificar as validacoes na documentacao do mongoose para usar nos models https://mongoosejs.com/docs/validation.html

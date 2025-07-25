@@ -4,17 +4,17 @@ import Prato from "../models/Prato.js";
 
 class PedidoController { 
     //GET- listar todos os pedidos
-    static async listarPedidos (req, res){
+    static async listarPedidos (req, res, next){
         try {
             const pedidos = await Pedido.find().populate("cliente").populate("pratos.prato");
             res.status(200).json(pedidos);
         } catch (error) {
-            res.status(500).json({ message: error.message });
+            next(error);
         }
     };
 
     //GET - lista com Filtros
-    static async listaPedidosComFiltros(req, res){
+    static async listaPedidosComFiltros(req, res, next){
         const { status, totalMin, totalMax } = req.query;
 
         try {
@@ -31,12 +31,12 @@ class PedidoController {
             
             res.status(200).json(pedidos);
         } catch (error) {
-            res.status(500).json({ message: error.message });
+            next(error);
         }
     };
 
     //POST - criar Pedido
-    static async criarPedido (req, res){
+    static async criarPedido (req, res, next){
         try {
             const { cliente, pratos } = req.body;
 
@@ -50,12 +50,12 @@ class PedidoController {
             const novoPedido = await Pedido.create({ cliente, pratos, total});
             res.status(201).json(novoPedido);
         } catch (error) {
-            res.status(500).json({ message: error.message });
+            next(error);
         }
     };
 
     //PUT - Atualiza Pedido
-    static async atualizaPedido(req, res) {
+    static async atualizaPedido(req, res, next) {
         const statusValidos = ["pendente", "preparando", "entregue"];
         
         try {
@@ -92,13 +92,13 @@ class PedidoController {
             res.status(200).json(pedidoAtualizado);
 
         } catch (error) {
-            res.status(500).json({ message: error.message });
+            next(error);
         }
     }
 
 
     //DELETE - Deleta pedido por id
-    static async deletarPedido (req, res){
+    static async deletarPedido (req, res, next){
         try {
             const pedidoDeletado = await Pedido.findByIdAndDelete(req.params.id);
             if (!pedidoDeletado) {
@@ -106,7 +106,7 @@ class PedidoController {
             }
             res.status(200).json({ message: "Pedido deletado com sucesso" });
         }catch (error) {
-        res.status(500).json({ message: error.message });
+            next(error);
         }
     };
 }
