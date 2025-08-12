@@ -1,7 +1,5 @@
 import { populate } from "dotenv";
-// import Pedido from "../models/Pedido.js";
-// import Prato from "../models/Prato.js";
-import { Prato, Pedido } from "../models/index.js"
+import { Prato, Pedido, Cliente} from "../models/index.js"
 
 class PedidoController { 
     //GET- listar todos os pedidos
@@ -16,7 +14,7 @@ class PedidoController {
 
     //GET - lista com Filtros
     static async listaPedidosComFiltros(req, res, next){
-        const { status, totalMin, totalMax } = req.query;
+        const { status, totalMin, totalMax, nomeCliente } = req.query;
 
         try {
             const filtro = {};
@@ -26,9 +24,18 @@ class PedidoController {
                 filtro.total = {};
                 if (totalMin) filtro.total.$gte = Number(totalMin);
                 if(totalMax) filtro.total.$lte = Number(totalMax);
+            };
+
+            if(nomeCliente){
+                const cliente = await Cliente.findOne({ nome: nomeCliente });
+                if(cliente){
+                    filtro.cliente = cliente._id
+                }else{
+                    return res.status(200).json([])
+                }
             }
 
-            const pedidos = await Pedido.find(filtro).populate("ciente").populate("pratos.prato");
+            const pedidos = await Pedido.find(filtro).populate("cliente").populate("pratos.prato");
             
             res.status(200).json(pedidos);
         } catch (error) {

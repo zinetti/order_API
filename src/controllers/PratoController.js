@@ -11,12 +11,18 @@ class PratoController {
   }
 
   static async listarPratosComFiltros(req, res, next) {
-    const { categoria } = req.query;
+    const { categoria, minPrice, maxPrice, nomePrato } = req.query;
 
     try {
       const filtro = {};
 
-      if (categoria) filtro.categoria = new RegExp(`^${categoria}$`, 'i');
+      if (categoria) filtro.categoria = new RegExp(categoria, 'i');
+      if (minPrice || maxPrice){
+        filtro.preco = {};
+        if (minPrice) filtro.preco.$gte = Number(minPrice);
+        if(maxPrice) filtro.preco.$lte = Number(maxPrice);
+      };
+      if (nomePrato) filtro.nome = new RegExp(nome, 'i')
 
       const pratos = await Prato.find(filtro);
       res.status(200).json(pratos);
