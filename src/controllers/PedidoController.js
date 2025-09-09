@@ -5,8 +5,11 @@ class PedidoController {
     //GET- listar todos os pedidos
     static async listarPedidos (req, res, next){
         try {
-            const pedidos = await Pedido.find().populate("cliente").populate("pratos.prato");
-            res.status(200).json(pedidos);
+            const buscaPedidos = Pedido.find();
+
+            req.resultado = buscaPedidos;
+            next();
+            
         } catch (error) {
             next(error)
         }

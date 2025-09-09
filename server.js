@@ -9,12 +9,18 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
-conectaBanco();
 
 routes(app);
 app.use(notFoundHandler);
 app.use(errorHandler);
 
-app.listen(port, () => {
-      console.log(`Servidor rodando na porta ${port}`);
-});
+conectaBanco()
+  .then(() => {
+    app.listen(port, () => {
+      console.log(`🚀 Servidor rodando na porta ${port}`);
+    });
+  })
+  .catch((err) => {
+    console.error("❌ Não foi possível conectar ao banco:", err.message);
+    process.exit(1); // encerra se não conectar
+  });
